@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to SpringMVC</title>
+</head>
+<body>
+    <form action="#" th:action="@{/home}" th:object="${newMessage}" method="POST">
+        <input th:field="*{text}" type="text">
+        <input type="submit">
+    </form>
+    <h1 th:text="${welcomeMessage} + 'is a boy'">I am here as a placeholder</h1>
+    <h2 th:each="msg: ${greetings}"
+        th:text="${msg}"
+        th:unless="${msg.contains('Bima')}"
+    >Another list of values</h2>
+</body>
+</html>
