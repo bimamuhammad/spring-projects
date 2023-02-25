@@ -34,7 +34,6 @@ public class AuthenticationService implements AuthenticationProvider {
             String encodedSalt = user.getSalt();
             String hashedPassword = hashService.getHashedValue(password, encodedSalt);
             if(user.getPassword().equals(hashedPassword)){
-                this.chatController.setUsername(username);
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
         }

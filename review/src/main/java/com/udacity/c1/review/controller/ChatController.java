@@ -5,6 +5,7 @@ import com.udacity.c1.review.model.ChatMessage;
 import com.udacity.c1.review.model.User;
 import com.udacity.c1.review.services.AuthenticationService;
 import com.udacity.c1.review.services.MessageService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,6 @@ public class ChatController {
         this.messageService = messageService;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     @GetMapping("/chat")
     public String getChatPage(@ModelAttribute("chatMessage") ChatForm chatForm, Model model){
@@ -31,9 +29,9 @@ public class ChatController {
         return "chat";
     }
     @PostMapping("/chat")
-    public String postChatPage(@ModelAttribute("chatMessage") ChatForm chatForm, Model model){
+    public String postChatPage(@ModelAttribute("chatMessage") ChatForm chatForm, Model model, Authentication authentication){
         ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setUsername(this.username);
+        chatForm.setUsername(authentication.getName());
         switch (chatForm.getMessageType()) {
             case "Say" -> chatMessage.setMessageText(chatForm.getMessage());
             case "Shout" -> chatMessage.setMessageText(chatForm.getMessage().toUpperCase());
