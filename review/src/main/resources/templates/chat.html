@@ -17,7 +17,7 @@
     <input type="submit">
   </form>
   <div th:each="msg: ${messages}">
-    <span th:text="${msg.username}">Username Placeholder</span>: <span th:text="${msg.messageText}">Message placeholder</span>
+    <span th:text="${msg.username}">Username Placeholder</span>: <span th:text="${msg.messageText}" id="message">Message placeholder</span>
   </div>
 </body>
 </html>

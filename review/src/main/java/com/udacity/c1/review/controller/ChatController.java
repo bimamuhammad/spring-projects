@@ -31,7 +31,7 @@ public class ChatController {
     @PostMapping("/chat")
     public String postChatPage(@ModelAttribute("chatMessage") ChatForm chatForm, Model model, Authentication authentication){
         ChatMessage chatMessage = new ChatMessage();
-        chatForm.setUsername(authentication.getName());
+        chatMessage.setUsername(authentication.getName());
         switch (chatForm.getMessageType()) {
             case "Say" -> chatMessage.setMessageText(chatForm.getMessage());
             case "Shout" -> chatMessage.setMessageText(chatForm.getMessage().toUpperCase());
